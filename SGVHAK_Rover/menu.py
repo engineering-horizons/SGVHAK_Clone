@@ -25,7 +25,7 @@ from subprocess import call
 import socket
 from SGVHAK_Rover import app
 from flask import flash, json, redirect, render_template, request, url_for
-import roverchassis
+from SGVHAK_Rover import roverchassis
 
 # Rover chassis geometry, including methods to calculate wheel angle and
 # velocity based on chassis geometry.

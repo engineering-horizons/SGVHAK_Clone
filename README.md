@@ -1,3 +1,6 @@
+# NOTE: THIS IS FOR PERSONAL USE ONLY BELOW IS ORIGINAL DOCUMENTATION
+The only changes made to this program is updating some outdated `python 2.7.14` for use with `python 3.14`
+
 # SGVHAK Rover
 This software is the brain of [SGVHAK](http://www.sgvhak.org/) Rover, a six-wheeled rover project inspired by the Mars rovers NASA JPL sent to the red planet. It presents an HTML user interface over HTTP that can be used by any device with a web browser. It communicates with underlying motor controllers via I2C and Serial. This software is designed to run on a Raspberry Pi 3 mounted on the rover, but can be adapted to other hardware as long as it can be a wireless access point and communicate with serial and I2C peripherals.
 
