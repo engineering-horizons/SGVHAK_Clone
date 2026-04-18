@@ -16,11 +16,11 @@ Setup for development & testing
 Written under `python 2.7.14` with associated `pip 9.0.1`
 - Python version dictated by Ion Motion Control's RoboClaw Python API, which is written for 2.7. See http://forums.ionmc.com/viewtopic.php?f=2&t=542
 
-### `virtualenv` recommended to help keep Python libraries separate.
+### `virtualenv` recommended to help keep Python libraries separate. (Updated to use `venv` instead `virtualenv` is outdated for Python 3)
 - Install virtualenv `pip install virtualenv`
 - Switch to SGVHAK_Rover directory
 - Create new virtual environment `python -m virtualenv venv`
-- Activate virtual environment `. venv/bin/activate`. Prompt should now be prepended with `(venv)`
+- Activate virtual environment `.venv/bin/activate`. Prompt should now be prepended with `(venv)`
   
 ### Install dependencies
 - All Python dependencies are described in setup.py and can be installed with `pip install -e .` (Don't forget the period at the end of the command.)
