@@ -24,11 +24,7 @@ SOFTWARE.
 import math
 import logging
 from . import configuration
-from . import roboclaw_wrapper
-from . import adafruit_servo_wrapper
 from . import lewansoul_wrapper
-from . import dynamixel_wrapper
-from . import dmfe_wrapper
 
 # Python 2 does not have a constant for infinity. (Python 3 added math.inf.)
 infinity = float("inf")
@@ -174,24 +170,7 @@ class chassis:
     """
     Creates the dictionary where a name in the configuration file can be
     matched with its corresponding motor controller.
-    """
-    try:
-      # Each instance of this class represents one group of RoboClaw connected
-      # together on the same packet serial network. Up to eight addressible
-      # RoboClaws and two motors per controller = up to 16 motors.
-      rclaw = roboclaw_wrapper.roboclaw_wrapper()
-      rclaw.connect()
-      self.motorcontrollers['roboclaw'] = rclaw
-    except ValueError as ve:
-      logging.getLogger(__name__).error("Unable to initialize roboclaw: %s",str(ve))
-
-    try:
-      asw = adafruit_servo_wrapper.adafruit_servo_wrapper()
-      asw.connect()
-      self.motorcontrollers['adafruit_servo'] = asw
-    except Exception as se:
-      logging.getLogger(__name__).error("Unable to initialize Adafruit Servo HAT library: %s",str(se))
-
+    """   
     try:
       lws = lewansoul_wrapper.lewansoul_wrapper()
       lws.connect()
@@ -199,19 +178,7 @@ class chassis:
     except Exception as se:
       logging.getLogger(__name__).error("Unable to initialize LewanSoul Servo Library: %s",str(se))
 
-    try:
-      dms = dynamixel_wrapper.dynamixel_wrapper()
-      dms.connect()
-      self.motorcontrollers['dynamixel'] = dms
-    except Exception as se:
-      logging.getLogger(__name__).error("Unable to initialize Dynamixel Servo Library: %s",str(se))
-
-    try:
-      dmfe = dmfe_wrapper.dmfe_wrapper()
-      dmfe.connect()
-      self.motorcontrollers['dmfe'] = dmfe
-    except Exception as se:
-      logging.getLogger(__name__).error("Unable to initialize DMFE serial bus device library: %s",str(se))
+    # blaker-dev: REMOVED OTHER MOTORCONTROLLERS
 
   def ensureready(self):
     """

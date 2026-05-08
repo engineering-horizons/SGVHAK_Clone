@@ -100,12 +100,16 @@ class lewansoul_wrapper:
       for d in data:
         packet.append(d)
 
-    checksum = servo_id + length + command
-    if data:
-      for d in data:
-        checksum = checksum + d
-    checksum = (~checksum) & 0xff
+
+    #blaker-dev: modify checksum calculation
+    checksum = ~(sum(packet[2:]) & 0xFF) & 0xFF
     packet.append(checksum)
+    # checksum = servo_id + length + command
+    # if data:
+    #   for d in data:
+    #     checksum = checksum + d
+    # checksum = (~checksum) & 0xff
+    # packet.append(checksum)
 
     packet_bytes = bytearray(packet)
     # print("Sending command byte stream of {}".format(bytetohex(packet_bytes)))
@@ -141,6 +145,10 @@ class lewansoul_wrapper:
       If a mismatch is found, a ValueError is raised.
     """
     self.check_sp()
+
+    # blaker-dev: Clear stale data to prevent Mac serial noise crashes
+    self.sp.reset_input_buffer()
+
     r = bytearray(self.sp.read(length))
 
     # Check response length
@@ -227,7 +235,9 @@ class lewansoul_wrapper:
     if inverted:
       power = power * -1
 
-    self.send(sid, 29, bytearray(pack('hh',1,power)))
+
+    # blaker-dev: MUST CAST POWER AS AN INT DUE TO HOW PACK WORKS
+    self.send(sid, 29, bytearray(pack('hh',1,int(power))))
 
   def set_max_current(self, id, current):
     """ LewanSoul does not support overpower protection. """
@@ -277,7 +287,8 @@ class lewansoul_wrapper:
       delta = delta * -1
 
     self.send(sid, 29, (0,0,0,0)) # Servo mode
-    self.send(sid, 1, bytearray(pack('hh', center+delta, 200)))
+    #blaer-dev: MUST CAST CENTER+DELTA AS AN INT DUE TO HOW PACK WORKS
+    self.send(sid, 1, bytearray(pack('hh', int(center+delta), 200)))
 
   def steer_setzero(self, id):
     sid, center, inverted = self.check_id(id)

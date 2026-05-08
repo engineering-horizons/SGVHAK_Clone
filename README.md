@@ -1,5 +1,20 @@
-# NOTE: THIS IS FOR PERSONAL USE ONLY BELOW IS ORIGINAL DOCUMENTATION
-The only changes made to this program is updating some outdated `python 2.7.14` for use with `python 3.14`
+# (blaker-dev) CLUB USE ONLY
+A couple modifications were necessary for compatibility with modern systems and lx16a servos
+
+> See below category for a list of all modifications
+
+## Club Usage
+We are only using lewansoul servos so these are the only wrapper and json files we need. (removed unecessary files - see original repo if curious)
+
+Modifications:
+
+  - updating some outdated `python 2.7.14` exception handling and imports
+  - reconfigure `lewansoul_wrapper.py`
+    - manually read byte data
+    
+  - updated some wrapper functions
+  - motor mode (required for 360 degree movement with lx16a servos) 
+
 
 # SGVHAK Rover
 This software is the brain of [SGVHAK](http://www.sgvhak.org/) Rover, a six-wheeled rover project inspired by the Mars rovers NASA JPL sent to the red planet. It presents an HTML user interface over HTTP that can be used by any device with a web browser. It communicates with underlying motor controllers via I2C and Serial. This software is designed to run on a Raspberry Pi 3 mounted on the rover, but can be adapted to other hardware as long as it can be a wireless access point and communicate with serial and I2C peripherals.
@@ -40,7 +55,7 @@ Setup for Rover Raspberry Pi
 ```
 cd /home/pi/SGVHAK_Rover
 export FLASK_APP=SGVHAK_Rover
-. venv/bin/activate
+. .venv/bin/activate
 flask run --host=0.0.0.0 &
 ```
 - Configure Pi to be a wireless access point by following instructions at https://www.raspberrypi.org/documentation/configuration/wireless/access-point-routed.md
