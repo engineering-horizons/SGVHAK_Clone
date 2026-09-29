@@ -15,6 +15,12 @@ Modifications:
   - updated some wrapper functions
   - motor mode (required for 360 degree movement with lx16a servos) 
 
+Usage:
+
+  - Installed onto raspberry pi 3 onboard the rover. Once the rover boots up, point your wifi connection to the rovers onboard wifi and open port 5000. 
+
+  > see `Setup for Rover Raspberry Pi` for troubleshooting
+
 
 # SGVHAK Rover
 This software is the brain of [SGVHAK](http://www.sgvhak.org/) Rover, a six-wheeled rover project inspired by the Mars rovers NASA JPL sent to the red planet. It presents an HTML user interface over HTTP that can be used by any device with a web browser. It communicates with underlying motor controllers via I2C and Serial. This software is designed to run on a Raspberry Pi 3 mounted on the rover, but can be adapted to other hardware as long as it can be a wireless access point and communicate with serial and I2C peripherals.
