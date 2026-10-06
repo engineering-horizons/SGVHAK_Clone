@@ -39,8 +39,8 @@ Setup for development & testing
 - Switch to SGVHAK_Rover directory
 - Create new virtual environment `python -m venv <venv-name>`
 - Activate venv: 
-    - (Linux / Mac): source <venv-name>/bin/activate 
-    - (Windows): <venv-name>\Scripts\activate
+    - (Linux / Mac): `source <venv-name>/bin/activate`
+    - (Windows): `<venv-name>\Scripts\activate`
 ### Install dependencies
 - All Python dependencies are described in setup.py and can be installed with `pip install -e .` (Don't forget the period at the end of the command.)
 - All HTML related dependencies are copied in the `/static/` subdirectory and no installation is necessary. Because the HTML UI is served up from the Raspberry Pi 3 acting as an access point without actual internet connectivity, we could not ask the user's web browser to download [jQuery](https://jquery.com/) and [Materialize](http://materializecss.com/). Instead, we have a local copy to serve up for use.
@@ -77,13 +77,16 @@ The HTML/CSS/JavaScript files in this project present the user interface for dri
 Configurations and Modifications
 ---
 **Physical Geometry**
+
 `roverchassis.py` requires knowing the physical layout of rover's wheels in order to properly calculate velocity and angle. Physical layout is described by specifying each wheel's (x,y) coordinate inside `config_roverchassis.json`. The coordinate system used is: Looking down on the rover from above, the front of the rover is the +Y axis and the right side of the rover is the +X axis. The center of the rover is the origin. The example length values in the repository are in inches, but any unit (either metric or imperial) may be used as long as they are used consistently. Since `roverchassis.py` calculations are made on their relative ratios.
 
 **Wheel Control**
+
 Aside from physical geometry, `config_roverchassis.json` also specifies two motor controls for each wheel. One for the rolling travel motion, and the other for steering control.
 * A freely rolling, undriven wheel will have `null` as its rolling control.
 * A wheel that has no steering motor will have `null` as its steering control.
 * It is valid to have a wheel that has `null` for both values. For example, a caster wheel.
 
 **UI Replacement (26wi/sp)**
+
 The web-based UI (HTML/CSS/JavaScript served by Flask) can be completely replaced by another system if desired. One example is to use a gaming controller communicating over Bluetooth. This Bluetooth communication module can call `move_velocity_radius` API on `roverchassis.py` to utilize all the same code calculating velocity/angle and sending them to the motor controllers.
